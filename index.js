@@ -1,5 +1,4 @@
 require('dotenv').config()
-const { MongoClient } = require('mongodb')
 const express = require("express")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
@@ -16,8 +15,8 @@ app.set("view engine", "ejs")
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI)
-        console.log("MongoDB connected")
+        const conn = await mongoose.connect(process.env.MONGO_URI)
+        console.log(`MongoDB Connected: ${conn.connection.host}`)
     } catch (error) {
         console.log(error)
         process.exit(1)
